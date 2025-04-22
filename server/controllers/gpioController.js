@@ -1,13 +1,16 @@
 
 const { Gpio } = require('onoff');
 
+const pin = 17
+const led = new Gpio(pin, 'out'); // Use GPIO pin 17
+
 const turnOnPin = (req, res) => {
     //const pin = parseInt(req.body.pin, 10);
-    const pin = 17;
+ 
     try {
-      const gpio = new Gpio(pin, 'out');
-      gpio.writeSync(1); // 1 = HIGH (turn on)
-      gpio.unexport();
+      
+      led.writeSync(1); // 1 = HIGH (turn on)
+      
       res.json({ success: true, message: `Pin ${pin} turned ON` });
     } catch (err) {
       console.error(`Failed to turn on pin ${pin}:`, err.message);
@@ -17,16 +20,21 @@ const turnOnPin = (req, res) => {
   
   const turnOffPin = (req, res) => {
     //const pin = parseInt(req.body.pin, 10);
-    const pin = 17;
+  
     try {
-      const gpio = new Gpio(pin, 'out');
-      gpio.writeSync(0); // 0 = LOW (turn off)
-      gpio.unexport();
+    
+      led.writeSync(0); // 0 = LOW (turn off)
+    
       res.json({ success: true, message: `Pin ${pin} turned OFF` });
     } catch (err) {
       console.error(`Failed to turn off pin ${pin}:`, err.message);
       res.status(500).json({ success: false, message: 'GPIO error' });
     }
   };
+
+  process.on('SIGINT', () => {
+    led.unexport();
+    process.exit();
+  });
   
   module.exports = { turnOnPin, turnOffPin };
