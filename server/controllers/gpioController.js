@@ -2,8 +2,8 @@
 const { Gpio } = require('onoff');
 
 const turnOnPin = (req, res) => {
-    const pin = parseInt(req.body.pin, 10);
-  
+    //const pin = parseInt(req.body.pin, 10);
+    const pin = 17;
     try {
       const gpio = new Gpio(pin, 'out');
       gpio.writeSync(1); // 1 = HIGH (turn on)
@@ -16,8 +16,8 @@ const turnOnPin = (req, res) => {
   };
   
   const turnOffPin = (req, res) => {
-    const pin = parseInt(req.body.pin, 10);
-  
+    //const pin = parseInt(req.body.pin, 10);
+    const pin = 17;
     try {
       const gpio = new Gpio(pin, 'out');
       gpio.writeSync(0); // 0 = LOW (turn off)
