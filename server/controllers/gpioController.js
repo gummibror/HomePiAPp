@@ -1,8 +1,8 @@
 
 const { Gpio } = require('onoff');
 
-const pin = 17
-const led = new Gpio(pin, 'out'); // Use GPIO pin 17
+const pin = 529; // fysiska pin 17 har nummer 529 i raspbians kernels schema
+const led = new Gpio(pin, 'out'); // Use  physical GPIO pin 17
 
 const turnOnPin = (req, res) => {
     //const pin = parseInt(req.body.pin, 10);
